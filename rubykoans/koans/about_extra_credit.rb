@@ -6,3 +6,15 @@
 # You already have a DiceSet class and score function you can use.
 # Write a player class and a Game class to complete the project.  This
 # is a free form assignment, so approach it however you desire.
+
+class DiceSet
+    attr_reader :values
+  
+    def initialize()
+      @values = []
+    end
+     def roll(tamaño)
+      @values = Array.new(tamaño) { |x| x = rand(1..6) }
+     end
+end
+
