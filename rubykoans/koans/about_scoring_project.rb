@@ -9,7 +9,7 @@ require File.expand_path(File.dirname(__FILE__) + '/neo')
 # * A set of three ones is 1000 points
 #
 # * A set of three numbers (other than ones) is worth 100 times the
-#   number. (e.g. three fives is 500 points).
+#   number. (e.g. three five is 500 points).
 #
 # * A one (that is not part of a set of three) is worth 100 points.
 #
@@ -31,6 +31,43 @@ require File.expand_path(File.dirname(__FILE__) + '/neo')
 
 def score(dice)
   # You need to write this method
+  @score = 0
+
+  ones = dice.count(1)
+  two = dice.count(2)
+  three = dice.count(3)
+  four = dice.count(4)
+  five = dice.count(5)
+  six = dice.count(6)
+  seven = dice.count(7)
+  eight = dice.count(8)
+  nine = dice.count(9)
+
+  ones >= 3 ? @score+=1000 : false
+  two >= 3 ? @score+=200 : false
+  three >= 3 ? @score+=300 : false
+  four >= 3 ? @score+=400 : false
+  five >= 3 ? @score+=500 : false
+  six >= 3 ? @score+=600 : false
+  seven >= 3 ? @score+=700 : false
+  eight >= 3 ? @score+=800 : false
+  nine >= 3 ? @score+=900 : false
+
+  ones >= 3 ? ones-= 3 : false
+  two >= 3 ? two-= 3 : false
+  three >= 3 ? three-= 3 : false
+  four >= 3 ? four-= 3 : false
+  five >= 3 ? five-= 3 : false
+  six >= 3 ? six-= 3 : false
+  seven >= 3 ? seven-= 3 : false
+  eight >= 3 ? eight-= 3 : false
+  nine >= 3 ? nine-= 3 : false
+
+
+  ones < 3 ? @score+= (100*ones) : 0
+  five < 3? @score+= (50*five) : 0
+
+
 end
 
 class AboutScoringProject < Neo::Koan

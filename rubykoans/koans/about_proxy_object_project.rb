@@ -13,12 +13,37 @@ require File.expand_path(File.dirname(__FILE__) + '/neo')
 # of the Proxy class is given in the AboutProxyObjectProject koan.
 
 class Proxy
+
+  attr_accessor :channel, :power
+
   def initialize(target_object)
     @object = target_object
     # ADD MORE CODE HERE
+
   end
 
   # WRITE CODE HERE
+  def on?
+    @object.on?
+  end
+
+  def power
+    @object.power
+  end
+
+  def channel=(new_channel)
+    @object.channel = new_channel
+  end
+
+  def channel
+    @object.channel
+  end
+
+  def messages
+    [:power, :channel=]
+  end
+
+
 end
 
 # The proxy object should pass the following Koan:
@@ -38,7 +63,6 @@ class AboutProxyObjectProject < Neo::Koan
 
     tv.channel = 10
     tv.power
-
     assert_equal 10, tv.channel
     assert tv.on?
   end
@@ -113,6 +137,7 @@ class Television
   def on?
     @power == :on
   end
+
 end
 
 # Tests for the Television class.  All of theses tests should pass.
