@@ -19,20 +19,29 @@ class Proxy
   def initialize(target_object)
     @object = target_object
     # ADD MORE CODE HERE
+    @messages = []
+    @on_times = 0
+    @power_times = 0
+    @channel_times = 0
 
   end
 
   # WRITE CODE HERE
   def on?
     @object.on?
+    @on_times+=1
   end
 
   def power
     @object.power
+    @power_times+=1
+    @messages << :power
   end
 
   def channel=(new_channel)
     @object.channel = new_channel
+    @channel_times+=1
+    @messages << :channel=
   end
 
   def channel
@@ -40,8 +49,24 @@ class Proxy
   end
 
   def messages
-    [:power, :channel=]
+    @messages
   end
+
+  def called?(method)
+		number_of_times_called(method)
+	end
+	
+  
+  def number_of_times_called(method)
+    return @on_times if method == :on?
+    return @power_times if method == :power
+    return @channel_times if method == :channel=
+  end
+
+	def method_missing(method_name, *args, &block)
+		@messages << method_name
+		@object.send(method_name, *args, &block)
+	end
 
 
 end
